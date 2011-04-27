@@ -1,0 +1,7 @@
+h2. Simple HTTP request logger app written in Sinatra
+
+This app written to try out MongoDB with Mongoid gem. Also used framework agnostic will-paginate.
+
+<pre><code>$ bundle install
+$ bundle exec rackup</code></pre>
+
