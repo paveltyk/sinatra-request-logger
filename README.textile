@@ -1,7 +1,14 @@
 h2. Simple HTTP request logger app written in Sinatra
 
-This app written to try out MongoDB with Mongoid gem. Also used framework agnostic will-paginate.
+This app written to compare MongoDB with Mongoid gem and MySQL with mysql2 gem. Also used framework agnostic will-paginate.
 
 <pre><code>$ bundle install
 $ bundle exec rackup</code></pre>
+
+h2. Available routes
+
+* /mongo/list - List all Mongo records.
+* /mongo/create - Create a record in MongoDB. You can pass "qtt" param to create more then one record per request.
+* /mysql/list - List all MySQL records.
+* /mysql/create - Create a record in MySQL db. You can pass "qtt" param to create more then one record per request.
 

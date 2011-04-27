@@ -13,13 +13,13 @@ class RequestLoggerApp < Sinatra::Base
     "Creted records: #{qtt}"
   end
 
-  get '/ar/list' do
+  get '/mysql/list' do
     @http_requests_total = HttpRequestAR.count
     @http_requests = HttpRequestAR.order('created_at DESC').paginate :page => params[:page], :per_page => 1000
     erb :list
   end
 
-  get '/ar/create' do
+  get '/mysql/create' do
     qtt = (params[:qtt] || 1).to_i
     qtt.times { HttpRequestAR.create :uri_string => request.env['REQUEST_URI'] }
     "Creted records: #{qtt}"
