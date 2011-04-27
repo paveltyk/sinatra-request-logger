@@ -1,17 +1,16 @@
 class RequestLoggerApp < Sinatra::Base
   helpers WillPaginate::ViewHelpers::Base
-  get '/list' do
+
+  get '/mongo/list' do
     @http_requests_total = HttpRequest.count
-    @http_requests = HttpRequest.desc(:created_at).paginate :page => params[:page], :per_page => 100
+    @http_requests = HttpRequest.desc(:created_at).paginate :page => params[:page], :per_page => 1000
     erb :list
   end
 
-  get '/favicon.ico' do
-  end
-
-  get '*' do
-    http_request = HttpRequest.new :uri_string => request.env['REQUEST_URI']
-    http_request.save ? "success: #{http_request.uri_string}" : 'fail'
+  get '/mongo/create' do
+    qtt = (params[:qtt] || 1).to_i
+    qtt.times { HttpRequest.create :uri_string => request.env['REQUEST_URI'] }
+    "Creted records: #{qtt}"
   end
 end
 
