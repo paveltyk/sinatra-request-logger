@@ -1,4 +1,4 @@
-require './initializers/active_record'
+require './config/initializers/active_record'
 
 namespace :db do
   desc "migrate your database"

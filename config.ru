@@ -3,10 +3,10 @@ require 'bundler'
 
 Bundler.require
 
-Dir['./initializers/**/*.rb'].each { |f| require f }
+Dir['./config/initializers/**/*.rb'].each { |f| require f }
 Dir['./models/**/*.rb'].each { |f| require f }
 
-require './request_logger_app'
+require './application'
 
-run RequestLoggerApp
+run Application
 

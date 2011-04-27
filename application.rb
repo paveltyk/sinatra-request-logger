@@ -1,4 +1,4 @@
-class RequestLoggerApp < Sinatra::Base
+class Application < Sinatra::Base
   helpers WillPaginate::ViewHelpers::Base
 
   get '/mongo/list' do
