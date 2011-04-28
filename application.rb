@@ -1,6 +1,18 @@
 class Application < Sinatra::Base
   helpers WillPaginate::ViewHelpers::Base
 
+  get '/redis/list' do
+    # @http_requests = HttpRequestRedis.paginate :page => params[:page], :per_page => 1000
+    @http_requests = HttpRequestRedis.recent(1000)
+    erb :list
+  end
+
+  get '/redis/create' do
+    qtt = (params[:qtt] || 1).to_i
+    qtt.times { HttpRequestRedis.create :uri_string => request.env['REQUEST_URI'] }
+    "Created records: #{qtt}"
+  end
+
   get '/mongo/list' do
     @http_requests_total = HttpRequestMongo.count
     #@http_requests = HttpRequestMongo.desc(:created_at).paginate :page => params[:page], :per_page => 100

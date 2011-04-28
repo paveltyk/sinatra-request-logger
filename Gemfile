@@ -7,4 +7,5 @@ gem 'SystemTimer', '~> 1.2.3', :platforms => :mri_18
 gem 'activerecord'
 gem 'mysql2', '~> 0.2.6'
 gem 'rake'
+gem 'redis'
 
