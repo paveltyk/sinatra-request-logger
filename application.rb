@@ -10,7 +10,7 @@ class Application < Sinatra::Base
   get '/mongo/create' do
     qtt = (params[:qtt] || 1).to_i
     qtt.times { HttpRequestMongo.create :uri_string => request.env['REQUEST_URI'] }
-    "Creted records: #{qtt}"
+    "Created records: #{qtt}"
   end
 
   get '/mysql/list' do
@@ -22,7 +22,18 @@ class Application < Sinatra::Base
   get '/mysql/create' do
     qtt = (params[:qtt] || 1).to_i
     qtt.times { HttpRequestAR.create :uri_string => request.env['REQUEST_URI'] }
-    "Creted records: #{qtt}"
+    "Created records: #{qtt}"
+  end
+
+  get '/blank/list' do
+    @http_requests_total = 0
+    @http_requests = [].paginate :page => params[:page], :per_page => 1000
+    erb :list
+  end
+
+  get '/blank/create' do
+    qtt = (params[:qtt] || 1).to_i
+    "Created records: #{qtt}"
   end
 end
 
