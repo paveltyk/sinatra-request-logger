@@ -6,8 +6,7 @@
 </head>
 <body>
 <h1>Requests count: <%= @http_requests_total %></h1>
-<% require "will_paginate" %>
-<%= will_paginate @http_requests %>
+<h2>Recent 1000 requests</h2>
 <ul>
 <% @http_requests.each do |http_request| %>
 <li>[<%= http_request.created_at.strftime "%Y-%d-%m %H:%M:%S" %>] <%= http_request.uri_string %></li>

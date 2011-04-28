@@ -3,7 +3,8 @@ class Application < Sinatra::Base
 
   get '/mongo/list' do
     @http_requests_total = HttpRequestMongo.count
-    @http_requests = HttpRequestMongo.desc(:created_at).paginate :page => params[:page], :per_page => 100
+    #@http_requests = HttpRequestMongo.desc(:created_at).paginate :page => params[:page], :per_page => 100
+    @http_requests = HttpRequestMongo.desc(:created_at).limit(1000).all
     erb :list
   end
 
@@ -15,7 +16,7 @@ class Application < Sinatra::Base
 
   get '/mysql/list' do
     @http_requests_total = HttpRequestAR.count
-    @http_requests = HttpRequestAR.order('created_at DESC').paginate :page => params[:page], :per_page => 100
+    @http_requests = HttpRequestAR.order('created_at DESC').limit(1000).all
     erb :list
   end
 
@@ -27,7 +28,8 @@ class Application < Sinatra::Base
 
   get '/blank/list' do
     @http_requests_total = 0
-    @http_requests = [].paginate :page => params[:page], :per_page => 100
+    #@http_requests = [].paginate :page => params[:page], :per_page => 100
+    @http_requests = []
     erb :list
   end
 
