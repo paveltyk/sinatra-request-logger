@@ -1,8 +1,5 @@
 class Application < Sinatra::Base
-  helpers WillPaginate::ViewHelpers::Base
-
   get '/redis/list' do
-    # @http_requests = HttpRequestRedis.paginate :page => params[:page], :per_page => 1000
     @http_requests = HttpRequestRedis.recent(1000)
     erb :list
   end
@@ -15,7 +12,6 @@ class Application < Sinatra::Base
 
   get '/mongo/list' do
     @http_requests_total = HttpRequestMongo.count
-    #@http_requests = HttpRequestMongo.desc(:created_at).paginate :page => params[:page], :per_page => 100
     @http_requests = HttpRequestMongo.desc(:created_at).limit(1000).all
     erb :list
   end
@@ -40,7 +36,6 @@ class Application < Sinatra::Base
 
   get '/blank/list' do
     @http_requests_total = 0
-    #@http_requests = [].paginate :page => params[:page], :per_page => 100
     @http_requests = []
     erb :list
   end

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Sinatra HTTP Request Logger</title>
-        <meta content='text/html; charset=utf-8' http-equiv='content-type' />
-    </head>
-    <body>
-        <h1>Requests count: <%= @http_requests_total %></h1>
-        <h2>Recent 1000 requests</h2>
-        <ul>
-            <% @http_requests.each do |http_request| %>
-                <li>[<%= http_request.created_at.strftime "%Y-%d-%m %H:%M:%S" %>] <%= http_request.uri_string %></li>
-            <% end %>
-        </ul>
-    </body>
+<head>
+  <title>Sinatra HTTP Request Logger</title>
+  <meta content='text/html; charset=utf-8' http-equiv='content-type' />
+</head>
+<body>
+  <h1>Requests count: <%= @http_requests_total %></h1>
+  <h2>Recent 1000 requests</h2>
+  <ul>
+    <% @http_requests.each do |http_request| %>
+      <li>[<%= http_request.created_at.strftime "%Y-%d-%m %H:%M:%S" %>] <%= http_request.uri_string %></li>
+    <% end %>
+  </ul>
+</body>
 </html>
+
