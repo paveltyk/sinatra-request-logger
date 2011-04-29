@@ -1,6 +1,7 @@
 class Application < Sinatra::Base
   get '/redis/list' do
-    @http_requests = HttpRequestRedis.recent(1000)
+    @http_requests_total = HttpRequestRedis.count
+    @http_requests = HttpRequestRedis.limit(1000)
     erb :list
   end
 
