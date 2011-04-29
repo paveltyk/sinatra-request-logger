@@ -4,5 +4,6 @@ class HttpRequestMongo
 
   store_in :http_requests
   field :uri_string
+  index :created_at, :background => true
 end
 
