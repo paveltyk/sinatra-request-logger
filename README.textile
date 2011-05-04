@@ -15,3 +15,13 @@ h2. Available routes
 * /mysql/list - List all MySQL records.
 * /mysql/create - Create a record in MySQL db. You can pass "qtt" param to create more then one record per request.
 
+h2. Running MongoDB cluster with sharding
+
+There is and EngineYard chef recipe to setup MongoDB cluster and apply sharding.
+
+Cluster assumptions:
+
+* 1 App Server (will run MongoDB routing process)
+* 1 MongoDB Config Server (utility server with name: mongodb_shard_<N>)
+* 2 Shard Servers (utility server with name: mongodb_config)
+
