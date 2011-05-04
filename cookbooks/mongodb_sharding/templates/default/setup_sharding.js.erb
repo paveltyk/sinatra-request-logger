@@ -1,0 +1,4 @@
+<% @mongo_shards.each do |mongo_shard| -%>
+  db.runCommand( { addshard : "<%= mongo_shard[:hostname] %>:27018" } );
+<% end -%>
+

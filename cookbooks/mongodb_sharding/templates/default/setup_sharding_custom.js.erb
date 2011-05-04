@@ -1,0 +1,3 @@
+db.runCommand( { enablesharding : "request_logger_app" } );
+db.runCommand( { shardcollection : "request_logger_app.http_requests", key : { mod : 1 } });
+

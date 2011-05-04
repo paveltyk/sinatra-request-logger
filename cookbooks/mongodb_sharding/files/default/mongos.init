@@ -1,0 +1,31 @@
+#!/sbin/runscript
+# Copyright 1999-2009 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+depend() {
+  need net
+}
+
+MONGOS_EXEC="${MONGOS_EXEC:-/usr/bin/mongos}"
+MONGOS_LOG="${MONGOS_LOG:-/var/log/mongodb/mongodb.log}"
+MONGOS_USER="${MONGOS_USER:-mongodb}"
+MONGOS_PID_FILE="${MONGOS_PID_FILE:-/var/run/mongodb/mongos.pid}"
+MONGOS_CONFIG_DB="${MONGOS_CONFIG_DB:-localhost:27019}"
+
+start() {
+  ebegin "Starting ${SVCNAME}"
+
+  args="--logpath $MONGOS_LOG --logappend --configdb $MONGOS_CONFIG_DB"
+
+  start-stop-daemon --background --start --chuid ${MONGOS_USER} --pidfile \
+    "${MONGOS_PID_FILE}" --make-pidfile --exec ${MONGOS_EXEC} -- ${args}
+  eend $?
+}
+
+stop() {
+  ebegin "Stopping ${SVCNAME}"
+  start-stop-daemon --stop --exec ${MONGOS_EXEC} --pidfile ${MONGOS_PID_FILE}
+  eend $? "Failed to stop ${SVCNAME}"
+}
+
